@@ -1,6 +1,6 @@
 import { db, auth } from "./firebase.js";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
-import { setDoc, doc, getDoc} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+import { setDoc, doc} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import './cargarCiudades.js';
 import { showAlert } from "./showAlert.js";
 
@@ -69,7 +69,7 @@ async function registroAuth(nombre, genero, rh, departamento, ciudad, telefono, 
         }
     }
 }
-
+let estado = "";
 /// metodo para Inicio de sesion
 
 const loginForm = document.getElementById('loginForm');
@@ -84,15 +84,19 @@ loginForm.addEventListener('submit', async (evento) =>{
 
     try {
         const login = await signInWithEmailAndPassword(auth, correo.value, contra.value);
-        
 
-        loginForm.reset();
         const Modallogin = document.getElementById('inicioSesion');
         const modalLogin = bootstrap.Modal.getInstance(Modallogin);
         modalLogin.hide();
-        //console.log(login);
         
-    
+        if(login.user.email === "admin@firebase.com"){
+            loginForm.reset();
+            window.location.href='../src/Admin.html';
+        }else{
+            loginForm.reset();
+            window.location.href='../src/cliente.html';
+        }
+        
     } catch (error) {
         console.log(error.code);
         
@@ -104,47 +108,5 @@ loginForm.addEventListener('submit', async (evento) =>{
 
     }
 
-    // try {
-    //     const docRef = doc(db,"DBusers",correo.value);
-    //     const docSnap = await getDoc(docRef);
-
-    //     if (docSnap.exists()) {
-    //     console.log("Document data:", docSnap.data());
-    //     } else {
-    //     // doc.data() will be undefined in this case
-    //     console.log("No such document!");
-    //     }
-        
-    // } catch (error) {
-    //     console.log(error.code);
-    // }
-        
-    Datos(correo.value);
-
 })
 
-async function Datos (correo){
-    const docRef = doc(db,"DBusers",correo);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
-    }
-
-}
-
-const getDetails = async (correo) =>{
-    const docRef = doc(db,"DBusers",correo);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
-    }
-
-}
