@@ -1,86 +1,60 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
+    <style>
+        body{
+            background-image: url('./images/fondo2.jpg');
+            background-attachment: fixed;
+            background-size: 100%;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Cloud</title>
-    <!-- Script Index.js -->
-    <script type="module" src="./app/index.js"></script>
+    <title>Usuarios</title>
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <!-- Css Toastify -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <!-- Css style -->
-    <link rel="stylesheet" href="./src/css/style.css">
+     <!-- Css Toastify -->
+     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
-<body class="bg-dark text-white">
+<body class="bg-secondary">
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <div class="container d-flex justify-content-center align-items-center">
-          <a class="navbar-brand" href="#">Proyecto Cloud Develop</a>
+        <div class="container">
+          <a class="navbar-brand" id="titulo" href="./Admin.html">Proyecto Cloud Develop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="./adminUsuarios.html">Usuarios</a>
+                <a class="nav-link" href="./adminPruebas.html">Pruebas</a>
+                <button class="btn btn-outline-danger" id="cerrarSesion">Cerrar Sesion</button>
+              </div>
           </div>
         </div>
-      </nav>
-      
+    </nav>
 
-    <div class="container text-center vh-100 d-flex justify-content-center align-items-center">
-        <div class="row">
-            <div class="col-8">
-                <img src="./src/images/inicioImagen.jpg" class="img-fluid" width="100%">
-            </div>
-            
-            <div class="col-4 ">
-                <h1>Proyecto Firebase</h1>
-                <p>En este aplicativo web podrás aprender temas a cerca sobre ciber seguridad.</p>
-                <button class="btn btn-success" type="button"data-bs-toggle="modal" data-bs-target="#inicioSesion">Iniciar Sesion</button>
-                <button class="btn btn-primary" type="button"data-bs-toggle="modal" data-bs-target="#registro">Registrase</button>
-                
-            </div>
-        </div>
-    </div>
-    
-    
-    <!-- Inicio Sesion Modal -->
-    <div class="modal fade" id="inicioSesion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form class="bg-dark" id="loginForm">
-                <div class="modal-content bg-dark">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Inicio de Sesion</h1>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                    <div class="modal-body">
-                        <label class="text-white">Correo electronico</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <i class="bi bi-person-circle"></i>
-                                </span>
-                            </div>
-                            <input type="text" id="loginCorreo" name="" class="form-control input_user mb-3" value="" placeholder="Ejemplo@gmail.com" required>
-                        </div>
-                        <label class="text-white">Contraseña</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group mb-3">
-							    <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <i class="bi bi-key-fill"></i>
-                                    </span>
-							    	<i class="fas fa-user"></i>
-							    </div>
-                                <input type="password" id="loginContra" name="" class="form-control input_pass" value="" placeholder="password" required>
-						    </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" >Aceptar</button>
-                    </div>
-                </div>
+    <div class="container mt-3">
+        <table class="table table-dark table-striped" id="tablaRegistros">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Genero</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Rh</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Editar</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTabla">
 
-            </form>
-        </div>
+            </tbody>
+        </table>
     </div>
 
     <!-- Register Modal -->
@@ -89,7 +63,7 @@
             <form class="bg-dark" id="registerForm">
                 <div class="modal-content bg-dark">
                     <div class="modal-header ">
-                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Registro</h1>
+                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Actualizar Información</h1>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                     <div class="modal-body modal-dialog-scrollable">
@@ -174,53 +148,19 @@
                                 </span>
                             </div>
                             <input type="text" id="edtTelefono" name="" class="form-control input_user mb-3" value="" placeholder="Telefono" required>
+                            <input type="hidden" id="edtCorreo">
                         </div>
-                        <!-- Elemento correo --------------------------------------->
-                        <label class="text-white">Correo electronico</label>
+                        <!-- Elemento Tipo -------------------------------------->
+                        <label class="text-white">Tipo de Usuario</label>
                         <div class="input-group mb-1">
                             <div class="input-group-append">
                                 <span class="input-group-text">
-                                    <i class="bi bi-person-circle"></i>
+                                    <i class="bi bi-person-badge-fill"></i>
                                 </span>
                             </div>
-                            <input type="text" id="edtCorreo" name="" class="form-control input_user mb-3" value="" placeholder="Ejemplo@gmail.com" required>
+                            <input type="text" id="edtTipo" name="" class="form-control input_user mb-3" value="" placeholder="Tipo" required>
                         </div>
-                        <!-- Elemento correo --------------------------------------->
-                        <label class="text-white">Confirmar Correo electronico</label>
-                        <div class="input-group mb-1">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <i class="bi bi-person-circle"></i>
-                                </span>
-                            </div>
-                            <input type="text" id="edtConfirmarCorreo" name="" class="form-control input_user mb-3" value="" placeholder="Ejemplo@gmail.com" required>
-                        </div>
-                        <!-- Elemento Contraseña -->
-                        <label class="text-white">Contraseña</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group mb-3">
-							    <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <i class="bi bi-key-fill"></i>
-                                    </span>
-							    	<i class="fas fa-user"></i>
-							    </div>
-                                <input type="password" id="edtContra" name="" class="form-control input_pass" value="" placeholder="password" required>
-						    </div>
-                        </div>
-                        <!-- Elemento Contraseña -->
-                        <label class="text-white">Confirmar Contraseña</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group mb-3">
-							    <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <i class="bi bi-key-fill"></i>
-                                    </span>
-							    	<i class="fas fa-user"></i>
-							    </div>
-                                <input type="password" id="edtConfirmarContra" name="" class="form-control input_pass" value="" placeholder="password" required>
-						    </div>
-                        </div>
+                       
 
 
                         
@@ -233,7 +173,9 @@
             </form>
         </div>
     </div>
-    
+
+    <!-- JS adminUsuarios.js -->
+    <script type="module" src="../app/adminUsuarios.js"></script>
     <!-- JS Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <!-- JS Toastify -->

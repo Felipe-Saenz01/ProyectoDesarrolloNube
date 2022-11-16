@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            background-image: url('./images/portada2.jpg');
+            
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- Css Toastify -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>Pruebas</title>
+</head>
+<body class="bg-secondary">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" id="titulo" href="./Admin.html">Proyecto Cloud Develop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="./adminUsuarios.html">Usuarios</a>
+                <a class="nav-link" href="./adminPruebas.html">Pruebas</a>
+                <button class="btn btn-outline-danger" id="cerrarSesion">Cerrar Sesion</button>
+              </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container">
+          <h1 class="text-white">Panel de pruebas</h1>
+        <div class="row ">
+            <div class="col-2 ">
+                <h5 class="text-white">Agregar Prueba</h5>
+            </div>
+            <div class="col-6">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#prueba" >+</button> 
+            </div>
+        </div>
+
+        <div class="row mt-3 " id="vistaPruebas">
+
+        </div>
+
+      </div>
+
+      <!-- Register Prueba Modal -->
+    <div class="modal fade" id="prueba" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <form class="bg-dark" id="pruebaForm">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header ">
+                        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Registro Pruebas</h1>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    <div class="modal-body modal-dialog-scrollable">
+
+                        <!-- Elemento Nombre Prueba ---------------------------------------->
+                        <label class="text-white fs-4">Nombre Prueba</label>
+                        <input type="text" id="edtNombrePrueba" class="form-control input_pass mb-3" placeholder="Nombre Prueba" required>
+                        <!-- Elemento Pregunta 1 ---------------------------------------->
+                        <label class="text-white fs-5 ">Pregunta 1</label>
+                        <input type="text" id="edtPregunta1" class="form-control input_pass" placeholder="¿Pregunta 1?" required>
+                        <!-- Elemento Respuesta 1-1 ---------------------------------------->
+                        <label class="text-white">Respuesta 1</label>
+                        <input type="text" id="edtRespuesta1-1" class="form-control input_pass" placeholder="Respuesta 1" required>
+                        <!-- Elemento Respuesta 2-1 ---------------------------------------->
+                        <label class="text-white">Respuesta 2</label>
+                        <input type="text" id="edtRespuesta2-1" class="form-control input_pass" placeholder="Respuesta 2" required>
+                        <!-- Elemento Respuesta 3-1 ---------------------------------------->
+                        <label class="text-white">Respuesta 3</label>
+                        <input type="text" id="edtRespuesta3-1" class="form-control input_pass" placeholder="Respuesta 3" required>
+                        <!-- Elemento Respuesta correcta ---------------------------------------->
+                        <label class="text-white">Respuesta Correcta</label>
+                        <input type="text" id="edtRespuestaCorrecta1" class="form-control input_pass mb-3" placeholder="Respuesta correcta" required>
+                        <!-- Elemento Pregunta 2 ---------------------------------------->
+                        <label class="text-white fs-5">Pregunta 2</label>
+                        <input type="text" id="edtPregunta2" class="form-control input_pass" placeholder="¿Pregunta 2?" required>
+                        <!-- Elemento Respuesta 1-2 ---------------------------------------->
+                        <label class="text-white">Respuesta 1</label>
+                        <input type="text" id="edtRespuesta1-2" class="form-control input_pass" placeholder="Respuesta 1" required>
+                        <!-- Elemento Respuesta 2-2 ---------------------------------------->
+                        <label class="text-white">Respuesta 2</label>
+                        <input type="text" id="edtRespuesta2-2" class="form-control input_pass" placeholder="Respuesta 2" required>
+                        <!-- Elemento Respuesta 3-2 ---------------------------------------->
+                        <label class="text-white">Respuesta 3</label>
+                        <input type="text" id="edtRespuesta3-2" class="form-control input_pass" placeholder="Respuesta 3" required>
+                        <!-- Elemento correcta ---------------------------------------->
+                        <label class="text-white">Respuesta Correcta</label>
+                        <input type="text" id="edtRespuestaCorrecta2" class="form-control input_pass" placeholder="Respuesta correcta" required>
+                        
+                        
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" >Aceptar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+    <!-- JS Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- JS adminPruebas.js -->
+    <script type="module" src="../app/adminPruebas.js"></script>
+    <!-- JS Toastify -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    
+</body>
+</html>

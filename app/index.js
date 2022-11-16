@@ -1,6 +1,6 @@
 import { db, auth } from "./firebase.js";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
-import { setDoc, doc} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+import { setDoc, doc, getDoc} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import './cargarCiudades.js';
 import { showAlert } from "./showAlert.js";
 
@@ -69,7 +69,6 @@ async function registroAuth(nombre, genero, rh, departamento, ciudad, telefono, 
         }
     }
 }
-let estado = "";
 /// metodo para Inicio de sesion
 
 const loginForm = document.getElementById('loginForm');
@@ -80,22 +79,13 @@ loginForm.addEventListener('submit', async (evento) =>{
     const correo = loginForm['loginCorreo'];
     const contra = loginForm['loginContra'];
 
-    console.log(correo.value, contra.value)
-
     try {
         const login = await signInWithEmailAndPassword(auth, correo.value, contra.value);
 
         const Modallogin = document.getElementById('inicioSesion');
         const modalLogin = bootstrap.Modal.getInstance(Modallogin);
         modalLogin.hide();
-        
-        if(login.user.email === "admin@firebase.com"){
-            loginForm.reset();
-            window.location.href='../src/Admin.html';
-        }else{
-            loginForm.reset();
-            window.location.href='../src/cliente.html';
-        }
+        buscarNombre(login.user.email)
         
     } catch (error) {
         console.log(error.code);
@@ -109,4 +99,18 @@ loginForm.addEventListener('submit', async (evento) =>{
     }
 
 })
+
+async function buscarNombre(email){
+    const docSnap = await getDoc(doc(db, "DBusers", email))
+    if(docSnap.exists()){
+        if(docSnap.data().tipo === "Administrador"){
+            loginForm.reset();
+            window.location.href='../src/Admin.html';
+        }else{
+            loginForm.reset();
+            window.location.href='../src/cliente.html';
+        }
+    }
+
+}
 

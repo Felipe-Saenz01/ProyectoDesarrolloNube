@@ -20,7 +20,7 @@ export function showAlert(mensaje, tipo){
         },
         onClick: function(){
             if(tipo === "succes"){
-                window.location.href="../index.html";
+                location.reload();
             }
         } // Callback after click
       }).showToast();
